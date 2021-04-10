@@ -19,5 +19,44 @@ public class Main {
             numberOfWords.put(word, numberOfWords.getOrDefault(word, 0) + 1);
         }
         System.out.println(numberOfWords);
+
+        PhoneBook phoneBook = new PhoneBook();
+
+        phoneBook.add("Ivanov", "9111234567");
+        phoneBook.add("Petrov", "9157645890");
+        phoneBook.add("Sidorov", "9116230951");
+        phoneBook.add("Smirnov", "9116230951");
+        phoneBook.add("Ivanov", "9213234567");
+        phoneBook.add("Alekseev", "9060987654");
+        phoneBook.add("Maksimov", "9104563128");
+        phoneBook.add("Maksimov", "9101111111");
+        phoneBook.add("Maksimov", "9102222222");
+
+        System.out.println(phoneBook.get("Petrov"));
+        System.out.println(phoneBook.get("Ivanov"));
+        System.out.println(phoneBook.get("Maksimov"));
+    }
+
+    static class PhoneBook {
+        private final HashMap<String, HashSet<String>> map;
+
+        PhoneBook() {
+            this.map = new HashMap<>();
+        }
+
+        void add(String name, String phone) {
+            HashSet<String> numbers;
+            if (map.containsKey(name)) {
+                numbers = map.get(name);
+            } else {
+                numbers = new HashSet<>();
+            }
+            numbers.add(phone);
+            map.put(name, numbers);
+        }
+
+        Set<String> get(String getName) {
+            return map.get(getName);
+        }
     }
 }
